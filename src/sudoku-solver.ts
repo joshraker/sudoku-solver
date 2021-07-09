@@ -3,7 +3,7 @@ import { Logger } from './logger';
 import { nullLogger } from './null-logger';
 import { Sudoku } from './sudoku';
 
-export abstract class SudokuSolver extends ProblemSolver<number> {
+export class SudokuSolver extends ProblemSolver<number> {
   get logger(): Logger {
     return this.debug ? console : nullLogger;
   }
@@ -81,17 +81,17 @@ export abstract class SudokuSolver extends ProblemSolver<number> {
     this.logger.log(`Solved ${variable.toString()}`);
   }
 
-  testVariable() {
+  testVariable(): void {
     this.logger.log(`Trying value ${this.currentTest?.testValues[0]} on ${this.currentTest?.testVariable.toString()}`);
     super.testVariable();
   }
 
-  rollbackTest() {
+  rollbackTest(): void {
     this.logger.log(`Rolling back ${this.currentTest?.testVariable.toString()}`);
     super.rollbackTest();
   }
 
-  popState() {
+  popState(): void {
     super.popState();
     this.logger.log(`Rolling back ${this.currentTest?.testVariable.toString()}`);
   }
